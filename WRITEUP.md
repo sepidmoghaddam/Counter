@@ -32,7 +32,7 @@ The size of the model pre- and post-conversion was...
 The inference time of the model pre- and post-conversion was...
 1. [Tensorflow SSD Mobilenet V2]
   - Inference time: 70.793ms
-  ![TensorflowSSD_MobilenetV2.png](images/TensorflowSSD MobilenetV2.png)
+  ![TensorflowSSD_MobilenetV2.png](images/TensorflowSSD_MobilenetV2.png)
 
 2. [Tensorflow SSD_ResNet_50_fpn_coco]
   - Inference time: 2720.525ms
