@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
  Copyright (c) 2018 Intel Corporation.
-
  Permission is hereby granted, free of charge, to any person obtaining
  a copy of this software and associated documentation files (the
  "Software"), to deal in the Software without restriction, including
@@ -9,10 +8,8 @@
  distribute, sublicense, and/or sell copies of the Software, and to
  permit persons to whom the Software is furnished to do so, subject to
  the following conditions:
-
  The above copyright notice and this permission notice shall be
  included in all copies or substantial portions of the Software.
-
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +22,7 @@
 import os
 import sys
 import logging as log
-from openvino.inference_engine import IENetwork, IECore, IEPlugin
+from openvino.inference_engine import IENetwork, IEPlugin
 
 
 class Network:
@@ -35,7 +32,6 @@ class Network:
     """
 
     def __init__(self):
-        ### TODO: Initialize any class variables desired ###
         self.net = None
         self.plugin = None
         self.input_blob = None
@@ -44,11 +40,6 @@ class Network:
         self.infer_request_handle = None
 
     def load_model(self, model, device, input_size, output_size, num_requests, cpu_extension=None, plugin=None):
-        ### TODO: Load the model ###
-        ### TODO: Check for supported layers ###
-        ### TODO: Add any necessary extensions ###
-        ### TODO: Return the loaded inference plugin ###
-        ### Note: You may need to update the function parameters. ###
         """
          Loads a network and an image to the Inference Engine plugin.
         :param model: .xml file of pre trained model
@@ -108,15 +99,13 @@ class Network:
 
         return self.plugin, self.get_input_shape()
 
-
     def get_input_shape(self):
-        ### TODO: Return the shape of the input layer ###
         """
         Gives the shape of the input layer of the network.
         :return: None
         """
         return self.net.inputs[self.input_blob].shape
-    
+
     def performance_counter(self, request_id):
         """
         Queries performance measures per layer to get feedback of what is the
@@ -128,9 +117,6 @@ class Network:
         return perf_count
 
     def exec_net(self, request_id, frame):
-        ### TODO: Start an asynchronous request ###
-        ### TODO: Return any necessary information ###
-        ### Note: You may need to update the function parameters. ###
         """
         Starts asynchronous inference for specified request.
         :param request_id: Index of Infer request value. Limited to device capabilities.
@@ -142,9 +128,6 @@ class Network:
         return self.net_plugin
 
     def wait(self, request_id):
-        ### TODO: Wait for the request to be complete. ###
-        ### TODO: Return any necessary information ###
-        ### Note: You may need to update the function parameters. ###
         """
         Waits for the result to become available.
         :param request_id: Index of Infer request value. Limited to device capabilities.
@@ -154,8 +137,6 @@ class Network:
         return wait_process
 
     def get_output(self, request_id, output=None):
-        ### TODO: Extract and return the output results
-        ### Note: You may need to update the function parameters. ###
         """
         Gives a list of results for the output layer of the network.
         :param request_id: Index of Infer request value. Limited to device capabilities.

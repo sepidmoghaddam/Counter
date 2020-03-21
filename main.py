@@ -44,7 +44,6 @@ MQTT_KEEPALIVE_INTERVAL = 60
 def build_argparser():
     """
     Parse command line arguments.
-
     :return: command line arguments
     """
     parser = ArgumentParser()
@@ -68,6 +67,7 @@ def build_argparser():
     parser.add_argument("-pc", "--perf_counts", type=str, default=False,
                         help="Print performance counters")
     return parser
+
 
 def performance_counts(perf_count):
     """
@@ -157,6 +157,7 @@ def main():
     prob_threshold = args.prob_threshold
     initial_w = cap.get(3)
     initial_h = cap.get(4)
+    lagtime = 0
     while cap.isOpened():
         flag, frame = cap.read()
         if not flag:
@@ -194,10 +195,15 @@ def main():
             # Person duration in the video is calculated
             if current_count < last_count:
                 duration = int(time.time() - start_time)
-                # Publish messages to the MQTT server
-                client.publish("person/duration",
-                               json.dumps({"duration": duration}))
-
+                if duration > 0:
+                    # Publish messages to the MQTT server
+                    client.publish("person/duration",
+                                    json.dumps({"duration": duration + lagtime}))
+                    
+                else:
+                    lagtime += 1
+                    log.warning(lagtime)
+        
             client.publish("person", json.dumps({"count": current_count}))
             last_count = current_count
 
